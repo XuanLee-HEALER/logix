@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  /* Hand-Drawn Color Palette */
+  --color-paper: #fdfbf7;
+  --color-pencil: #2d2d2d;
+  --color-erased: #e5e0d8;
+  --color-marker-red: #ff4d4d;
+  --color-pen-blue: #2d5da1;
+  --color-postit: #fff9c4;
+
+  /* Typography */
+  --font-heading: "Kalam", cursive;
+  --font-body: "Patrick Hand", cursive;
+
+  /* Hard Offset Shadows */
+  --shadow-sketch: 4px 4px 0px 0px #2d2d2d;
+  --shadow-sketch-lg: 8px 8px 0px 0px #2d2d2d;
+  --shadow-sketch-sm: 2px 2px 0px 0px #2d2d2d;
+  --shadow-sketch-subtle: 3px 3px 0px 0px rgba(45, 45, 45, 0.1);
+}
+
+/* Paper texture background */
+body {
+  font-family: var(--font-body);
+  color: var(--color-pencil);
+  background-color: var(--color-paper);
+  background-image: radial-gradient(var(--color-erased) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Wobbly border radius utilities */
+.wobbly {
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+.wobbly-md {
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+}
+
+.wobbly-sm {
+  border-radius: 225px 15px 255px 15px / 15px 255px 15px 225px;
+}
+
+.wobbly-alt {
+  border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px;
+}
+
+/* Decorative bounce animation */
+@keyframes gentle-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 3s ease-in-out infinite;
+}
