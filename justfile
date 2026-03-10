@@ -57,3 +57,18 @@ new-topic id:
     mkdir -p src/topics/{{id}}
     echo 'export default function {{id}}Page() {\n  return <div>{{id}}</div>;\n}' > src/topics/{{id}}/index.tsx
     @echo "Created src/topics/{{id}}/"
+
+# Deploy to arch (build + restart on remote)
+deploy:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "→ Syncing files to arch..."
+    tar --exclude='node_modules' --exclude='dist' --exclude='.git' --exclude='.cache' \
+        --no-mac-metadata -czf /tmp/logix.tar.gz .
+    scp /tmp/logix.tar.gz arch:~/apps/logix/
+    ssh arch "cd ~/apps/logix && tar -xzf logix.tar.gz && rm logix.tar.gz"
+    echo "→ Building & restarting container..."
+    ssh arch "cd ~/apps/logix && docker compose up -d --build --force-recreate"
+    echo "→ Verifying..."
+    ssh arch "docker ps --filter name=logix --format '{{{{.Names}}}}\t{{{{.Status}}}}\t{{{{.Ports}}}}'"
+    echo "✓ Deployed to learn.vision-rs.com"
