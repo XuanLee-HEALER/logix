@@ -10,8 +10,12 @@
   --color-postit: #fff9c4;
 
   /* Typography */
-  --font-heading: "Kalam", cursive;
-  --font-body: "Patrick Hand", cursive;
+  --font-heading:
+    "Kalam", "Hannotate SC", "Hannotate TC", "Wawati SC", "Wawati TC",
+    "STXingkai", "Kaiti SC", "Kaiti TC", "KaiTi", cursive;
+  --font-body:
+    "Patrick Hand", "Hannotate SC", "Hannotate TC", "Wawati SC", "Wawati TC",
+    "STXingkai", "Kaiti SC", "Kaiti TC", "KaiTi", cursive;
 
   /* Hard Offset Shadows */
   --shadow-sketch: 4px 4px 0px 0px #2d2d2d;
