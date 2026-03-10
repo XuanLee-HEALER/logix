@@ -1,5 +1,3 @@
-import { motion } from "motion/react";
-
 interface InputToggleProps {
   label: string;
   value: number;
@@ -10,18 +8,15 @@ export function InputToggle({ label, value, onToggle }: InputToggleProps) {
   const isOn = value === 1;
 
   return (
-    <motion.button
+    <button
       onClick={onToggle}
-      className={`wobbly border-[3px] px-5 py-2.5 font-heading text-xl font-bold transition-colors ${
+      className={`wobbly border-[3px] px-5 py-2.5 font-heading text-xl font-bold transition-all duration-150 hover:rotate-2 active:scale-95 active:translate-y-1 ${
         isOn
-          ? "border-pen-blue bg-pen-blue text-white shadow-sketch-sm"
+          ? "border-pen-blue bg-pen-blue text-white shadow-sketch-sm hover:-rotate-2"
           : "border-pencil/40 bg-white text-pencil/60 shadow-sketch"
       }`}
-      whileHover={{ rotate: isOn ? -2 : 2 }}
-      whileTap={{ scale: 0.95, y: 4 }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
     >
       {label} = {value}
-    </motion.button>
+    </button>
   );
 }

@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { motion } from "motion/react";
 import rough from "roughjs";
 import type { LatchType } from "../data";
 
@@ -252,16 +251,16 @@ function Wire({ points, live }: { points: [number, number][]; live: boolean }) {
   const segments = [];
   for (let i = 0; i < points.length - 1; i++) {
     segments.push(
-      <motion.line
+      <line
         key={i}
         x1={points[i]![0]}
         y1={points[i]![1]}
         x2={points[i + 1]![0]}
         y2={points[i + 1]![1]}
-        animate={{ stroke: live ? LIVE : DEAD }}
-        transition={{ duration: 0.3 }}
+        stroke={live ? LIVE : DEAD}
         strokeWidth={live ? 2.5 : 2}
         strokeLinecap="round"
+        style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
       />,
     );
   }
@@ -285,19 +284,15 @@ function OutputDot({
   const isOn = value === 1;
   return (
     <g>
-      <motion.circle
+      <circle
         cx={cx}
         cy={cy}
         r={14}
-        animate={{
-          fill: forbidden ? RED : isOn ? LIVE : DEAD,
-          opacity: forbidden ? [1, 0.4, 1] : 1,
-        }}
-        transition={
-          forbidden ? { duration: 0.8, repeat: Infinity } : { duration: 0.3 }
-        }
+        fill={forbidden ? RED : isOn ? LIVE : DEAD}
         stroke={PENCIL}
         strokeWidth={2}
+        style={{ transition: "fill 0.3s" }}
+        className={forbidden ? "animate-forbidden-blink" : undefined}
       />
       <text
         x={cx}
@@ -336,12 +331,12 @@ function SignalDot({
   live: boolean;
 }) {
   return (
-    <motion.circle
+    <circle
       cx={cx}
       cy={cy}
       r={3.5}
-      animate={{ fill: live ? LIVE : DEAD }}
-      transition={{ duration: 0.3 }}
+      fill={live ? LIVE : DEAD}
+      style={{ transition: "fill 0.3s" }}
     />
   );
 }
