@@ -1,21 +1,20 @@
 import { useRef, useEffect } from "react";
 import rough from "roughjs";
 import type { CircuitConfig } from "../data";
+import {
+  LIVE,
+  DEAD,
+  PENCIL,
+  RED,
+  BULB_ON,
+  BULB_OFF,
+  RO,
+  txt,
+  type RC,
+} from "@/lib/rough-helpers";
 
-/* ── Color palette ── */
-const LIVE = "#2d5da1";
-const DEAD = "#c4bfb6";
-const PENCIL = "#2d2d2d";
-const RED = "#ff4d4d";
-const BULB_ON = "#fff9c4";
-const BULB_OFF = "#e5e0d8";
 const W = 380;
 const H = 160;
-
-/* roughjs options */
-const RO = { roughness: 1.4, bowing: 1.2, seed: 42 };
-
-type RC = ReturnType<typeof rough.svg>;
 
 /* ── Primitives ── */
 
@@ -118,27 +117,6 @@ function notBubble(svg: SVGSVGElement, rc: RC, cx: number, cy: number) {
     }),
   );
   txt(svg, cx, cy + 4, "¬", 12, "700");
-}
-
-function txt(
-  svg: SVGSVGElement,
-  x: number,
-  y: number,
-  content: string,
-  size = 15,
-  weight = "700",
-  fill = PENCIL,
-) {
-  const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  el.setAttribute("x", String(x));
-  el.setAttribute("y", String(y));
-  el.setAttribute("text-anchor", "middle");
-  el.setAttribute("font-family", "Kalam, cursive");
-  el.setAttribute("font-size", String(size));
-  el.setAttribute("font-weight", weight);
-  el.setAttribute("fill", fill);
-  el.textContent = content;
-  svg.appendChild(el);
 }
 
 /* ── Layout functions ── */
