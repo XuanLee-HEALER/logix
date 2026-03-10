@@ -13,6 +13,24 @@ export const RO = { roughness: 1.4, bowing: 1.2, seed: 42 };
 
 export type RC = ReturnType<typeof rough.svg>;
 
+/* ── Combining overline (\u0305) is unreliable on mobile browsers.
+   Strip it and use text-decoration: overline instead. ── */
+const OVERLINE_RE = /(.)\u0305/g;
+
+/** Split a string into segments: plain text and overlined characters. */
+export function parseOverline(s: string): { text: string; over: boolean }[] {
+  const parts: { text: string; over: boolean }[] = [];
+  let last = 0;
+  for (const m of s.matchAll(OVERLINE_RE)) {
+    if (m.index! > last)
+      parts.push({ text: s.slice(last, m.index!), over: false });
+    parts.push({ text: m[1]!, over: true });
+    last = m.index! + m[0].length;
+  }
+  if (last < s.length) parts.push({ text: s.slice(last), over: false });
+  return parts;
+}
+
 /* ── SVG text helper ── */
 export function txt(
   svg: SVGSVGElement,
@@ -31,7 +49,21 @@ export function txt(
   el.setAttribute("font-size", String(size));
   el.setAttribute("font-weight", weight);
   el.setAttribute("fill", fill);
-  el.textContent = content;
+
+  const parts = parseOverline(content);
+  if (parts.length === 1 && !parts[0]!.over) {
+    el.textContent = content;
+  } else {
+    for (const p of parts) {
+      const tspan = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "tspan",
+      );
+      tspan.textContent = p.text;
+      if (p.over) tspan.setAttribute("text-decoration", "overline");
+      el.appendChild(tspan);
+    }
+  }
   svg.appendChild(el);
 }
 

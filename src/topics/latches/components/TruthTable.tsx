@@ -1,4 +1,5 @@
 import { AlertTriangle } from "lucide-react";
+import { Overlined } from "@/lib/Overlined";
 import type { TruthTableRow } from "../data";
 
 interface TruthTableProps {
@@ -28,12 +29,12 @@ export function TruthTable({
           <tr className="bg-erased font-heading text-sm font-bold tracking-wide">
             {inputLabels.map((label) => (
               <th key={label} className="border-b-2 border-pencil px-3 py-2">
-                {label}
+                <Overlined text={label} />
               </th>
             ))}
             <th className="border-b-2 border-l-2 border-pencil px-3 py-2">Q</th>
             <th className="border-b-2 border-l-2 border-pencil px-3 py-2">
-              Q&#x0305;
+              <span style={{ textDecoration: "overline" }}>Q</span>
             </th>
             <th className="border-b-2 border-l-2 border-pencil px-3 py-2">
               状态
@@ -75,7 +76,7 @@ export function TruthTable({
                       : "text-pencil/60"
                   }`}
                 >
-                  {row.outputs.Q}
+                  <Overlined text={row.outputs.Q} />
                 </td>
                 <td
                   className={`border-t border-l-2 border-pencil/20 px-3 py-2 font-mono text-lg ${
@@ -86,7 +87,7 @@ export function TruthTable({
                       : "text-pencil/60"
                   }`}
                 >
-                  {row.outputs.Qbar}
+                  <Overlined text={row.outputs.Qbar} />
                 </td>
                 <td
                   className={`border-t border-l-2 border-pencil/20 px-3 py-2 text-base ${

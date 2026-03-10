@@ -1,4 +1,4 @@
-import { LIVE, DEAD, PENCIL, RED } from "@/lib/rough-helpers";
+import { LIVE, DEAD, PENCIL, RED, parseOverline } from "@/lib/rough-helpers";
 
 export function Wire({
   points,
@@ -74,7 +74,15 @@ export function OutputDot({
         fontWeight="700"
         fill={PENCIL}
       >
-        {label}
+        {parseOverline(label).map((p, i) =>
+          p.over ? (
+            <tspan key={i} textDecoration="overline">
+              {p.text}
+            </tspan>
+          ) : (
+            <tspan key={i}>{p.text}</tspan>
+          ),
+        )}
       </text>
     </g>
   );

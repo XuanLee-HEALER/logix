@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { Card } from "@/components/Card";
+import { Overlined } from "@/lib/Overlined";
 import { latches, computeOutputs } from "./data";
 import type { LatchType } from "./data";
 import { LatchCircuit } from "./components/LatchCircuit";
@@ -139,7 +140,9 @@ export default function Latches() {
 
           {/* Explanation */}
           <Card decoration="tack" postit>
-            <p className="text-lg leading-relaxed">{latch.explain}</p>
+            <p className="text-lg leading-relaxed">
+              <Overlined text={latch.explain} />
+            </p>
           </Card>
 
           {/* Walkthrough */}
@@ -157,7 +160,7 @@ export default function Latches() {
                     {i + 1}
                   </span>
                   <p className="text-base leading-relaxed text-pencil/80">
-                    {step}
+                    <Overlined text={step} />
                   </p>
                 </div>
               ))}

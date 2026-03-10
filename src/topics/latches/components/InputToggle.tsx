@@ -1,3 +1,5 @@
+import { Overlined } from "@/lib/Overlined";
+
 interface InputToggleProps {
   label: string;
   value: number;
@@ -16,7 +18,7 @@ export function InputToggle({ label, value, onToggle }: InputToggleProps) {
           : "border-pencil/40 bg-white text-pencil/60 shadow-sketch"
       }`}
     >
-      {label} = {value}
+      <Overlined text={label} /> = {value}
     </button>
   );
 }
