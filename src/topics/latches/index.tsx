@@ -29,7 +29,9 @@ export default function Latches() {
   const latch = latches.find((l) => l.id === activeType)!;
   const output = computeOutputs(activeType, inputs, prevQ);
 
-  // Update prevQ when output is not in hold state
+  // Track the last valid Q so it can feed back as Q₀ (previous state).
+  // Skip updates during "保持" (hold) — Q₀ should stay unchanged.
+  // Skip updates during forbidden states — outputs are unstable/undefined.
   useEffect(() => {
     if (output.stateLabel !== "保持" && !output.forbidden) {
       setPrevQ(output.Q);
