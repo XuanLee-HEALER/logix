@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { Card } from "@/components/Card";
-import { CircleDot, ArrowRight } from "lucide-react";
+import { CircleDot, ToggleRight, ArrowRight } from "lucide-react";
 
 const topics = [
   {
@@ -10,6 +10,14 @@ const topics = [
     icon: CircleDot,
     rotation: "-rotate-1",
     decoration: "tape" as const,
+  },
+  {
+    id: "latches",
+    title: "锁存器电路图解",
+    description: "交互式探索 SR 锁存器与 D 锁存器",
+    icon: ToggleRight,
+    rotation: "rotate-1",
+    decoration: "tack" as const,
   },
 ];
 

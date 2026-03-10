@@ -73,3 +73,18 @@ h6 {
 .animate-gentle-bounce {
   animation: gentle-bounce 3s ease-in-out infinite;
 }
+
+/* Forbidden state blink for latch outputs */
+@keyframes forbidden-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-forbidden-blink {
+  animation: forbidden-blink 0.8s ease-in-out infinite;
+}
