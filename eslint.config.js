@@ -4,7 +4,7 @@ import prettier from "eslint-config-prettier";
 
 export default [
   {
-    files: ["src/**/*.{ts,tsx}"],
+    files: ["src/**/*.{ts,tsx}", "server/**/*.ts"],
     languageOptions: {
       parser: tsparser,
       parserOptions: {

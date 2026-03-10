@@ -25,6 +25,10 @@ build:
 preview:
     {{bun}} vite preview
 
+# Run backend server (watches for changes)
+server:
+    {{bun}} run --watch server/index.ts
+
 # TypeScript type check only
 typecheck:
     {{bun}} tsc --noEmit
